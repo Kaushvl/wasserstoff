@@ -49,25 +49,23 @@ def fetchUrlData(strUrl:str):
         listPageIds = AllWebData["WebData"][domainUrl]
 
         if len(listPageIds) < len(liIds):
-            # targetIds = [x for x in listPageIds if x not in liIds]
+            AllWebData["WebData"][domainUrl] = liIds
             lsProcessPageData = []
             
             for pageId in liIds:
-                if pageId not in listPageIds:
-                    pageData = {}
-                    pageData['id'] = pageId
-                    pageData['title'] = proJson[pageId]['title']['rendered']
-                    pageData['content'] = proJson[pageId]['content']['plain']
-                    lsProcessPageData.append(pageData)    
+                pageData = {}
+                pageData['id'] = pageId
+                pageData['title'] = proJson[pageId]['title']['rendered']
+                pageData['content'] = proJson[pageId]['content']['plain']
+                lsProcessPageData.append(pageData) 
+            bOutput = PreProcessData(lsProcessPageData)
+            print(bOutput)  
 
     json_object = json.dumps(AllWebData, indent=4)
  
     # Writing to WbePageCounts
     with open(WebInfoFilePath, "w") as outfile:
         outfile.write(json_object)
-
-    bOutput = PreProcessData(lsProcessPageData)
-    print(bOutput)
 
     return 
 
