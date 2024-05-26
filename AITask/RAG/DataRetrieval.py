@@ -2,7 +2,7 @@ import requests
 import re
 import json
 requests_session = requests.Session()
-from VDatabase import PreProcessData
+from RAG.VDatabase import PreProcessData
 
 def extractWebsiteName(url):
     # Ensure the URL starts with http:// or https://
@@ -20,7 +20,7 @@ def extractWebsiteName(url):
 
 def fetchUrlData(strUrl:str):
 
-    WebInfoFilePath = "RAG\WebPageCount.json"
+    WebInfoFilePath = "AITask\RAG\WebPageCount.json"
 
     domainUrl = extractWebsiteName(strUrl)
 

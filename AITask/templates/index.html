@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RAG Flask App</title>
+    <script>
+        async function processUrl() {
+            const url = document.getElementById('url').value;
+            const response = await fetch('/process_url', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ url: url }),
+            });
+            const result = await response.json();
+            alert(result.message || result.error);
+        }
+
+        async function queryDatabase() {
+            const query = document.getElementById('query').value;
+            const response = await fetch('/query', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ query: query }),
+            });
+            const result = await response.json();
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = JSON.stringify(result, null, 2);
+        }
+    </script>
+</head>
+<body>
+    <h1>RAG Flask App</h1>
+    <div>
+        <h2>Process URL</h2>
+        <input type="text" id="url" placeholder="Enter website URL">
+        <button onclick="processUrl()">Process</button>
+    </div>
+    <div>
+        <h2>Query Database</h2>
+        <input type="text" id="query" placeholder="Enter your query">
+        <button onclick="queryDatabase()">Query</button>
+    </div>
+    <div>
+        <h2>Results</h2>
+        <pre id="results"></pre>
+    </div>
+</body>
+</html>

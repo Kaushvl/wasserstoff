@@ -7,8 +7,6 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings
 import google.generativeai as genai
 from dotenv import load_dotenv
 
-load_dotenv()
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 def PreProcessData(lsData):
     docs = []
