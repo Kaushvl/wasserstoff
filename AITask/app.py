@@ -3,6 +3,7 @@ import sys
 from RAG.DataRetrieval import fetchUrlData
 from RAG.VDatabase import answer_query
 from RAG.LLMProcessing import get_conversational_chain
+import time
 
 app = Flask(__name__,template_folder="./templates")
 
@@ -39,12 +40,12 @@ def query():
         print(context)
         
         # Get the conversational chain
-        chain = get_conversational_chain(question=user_query,context= context)
+        answer = get_conversational_chain(question=user_query,context= context)
 
         print("44 dfd Done")
         
         # Run the chain to get the answer
-        answer = chain.invoke({"question":user_query,"input_documents":context_results})
+        # answer = chain.invoke({"question":user_query,"input_documents":context_results})
 
         print(answer)
         
